@@ -13,7 +13,16 @@ const users_controller_1 = require("./users.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_model_1 = require("../models/user.model");
 const errorMessage_service_1 = require("../shared/errorMessage.service");
+const validate_user_middleware_1 = require("./middlewares/validate-user.middleware");
 let UsersModule = class UsersModule {
+    configure(consumer) {
+        consumer.apply(validate_user_middleware_1.ValidateUserMiddleware)
+            .exclude({
+            path: 'api/Users/create',
+            method: common_1.RequestMethod.POST
+        })
+            .forRoutes(users_controller_1.UsersController);
+    }
 };
 UsersModule = __decorate([
     (0, common_1.Module)({

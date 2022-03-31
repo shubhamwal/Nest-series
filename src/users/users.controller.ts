@@ -19,7 +19,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/create')
   @UsePipes(ValidationPipe)
   create(@Body() createUserDto: CreateUserDto) {
     const data = this.usersService.create(createUserDto);
@@ -38,7 +38,7 @@ export class UsersController {
       throw new HttpException('Something went wrong', HttpStatus.BAD_REQUEST);
   }
 
-  @Get(':id')
+  @Get('/search/:id')
   findOne(@Param('id') id: string) {
     const data = this.usersService.findOne(id);
 

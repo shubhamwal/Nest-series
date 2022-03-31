@@ -50,6 +50,9 @@ export class UsersService {
     const data = await this.UserModel.findByIdAndDelete(
       new mongoose.Types.ObjectId(id),
     );
+    if(!data){
+      return{message:"no id found"};
+    }
     return {message:"successfully deleted"};
   }
 }

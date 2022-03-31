@@ -7,6 +7,7 @@ import { ResponseInterceptor } from './shared/interceptor/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
   await app.listen(3000);
   const errorMessageService = app.get(ErrorMessageService);
 app.useGlobalInterceptors(

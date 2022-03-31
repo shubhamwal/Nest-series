@@ -48,6 +48,9 @@ let UsersService = class UsersService {
     }
     async remove(id) {
         const data = await this.UserModel.findByIdAndDelete(new mongoose_2.default.Types.ObjectId(id));
+        if (!data) {
+            return { message: "no id found" };
+        }
         return { message: "successfully deleted" };
     }
 };
